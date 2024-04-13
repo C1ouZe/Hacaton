@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Geologica_Cursive-Light";
+  font-weight: 300;
+  src: local("Geologica_Cursive-Light"),
+    url("/Site_Filarmony/FontGeologica/Geologica_Cursive-Light.woff")
+      format("woff"),
+    url("/Site_Filarmony/FontGeologica/Geologica_Cursive-Light.ttf")
+      format("ttf");
+}
+@font-face {
+  font-family: "Geologica-Light";
+  font-weight: 300;
+  src: local("Geologica-Light"),
+    url("/Site_Filarmony/FontGeologica/Geologica-Light.woff") format("woff"),
+    url("/Site_Filarmony/FontGeologica/Geologica-Light.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Geologica-Regular";
+  font-weight: 400;
+  src: local("Geologica-Regular"),
+    url("/Site_Filarmony/FontGeologica/Geologica-Regular.woff") format("woff"),
+    url("/Site_Filarmony/FontGeologica/Geologica-Regular.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Geologica-SemiBold";
+  font-weight: 600;
+  src: local("Geologica-SemiBold"),
+    url("/Site_Filarmony/FontGeologica/Geologica-SemiBold.woff") format("woff"),
+    url("/Site_Filarmony/FontGeologica/Geologica-SemiBold.ttf") format("ttf");
+}

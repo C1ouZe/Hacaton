@@ -1,0 +1,144 @@
+/* Цвет для фона #0E132A */
+/* -----обнуление---------------------- */
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+html,
+body {
+  height: 100%;
+  line-height: 1;
+}
+body {
+  font-family: Geologica-Light;
+  font-weight: 300;
+}
+::-webkit-scrollbar {
+  width: 0;
+}
+[class*="__container"] {
+  max-width: 420px;
+  margin: 0px auto;
+}
+/* -------------------------------------------------------- */
+.wrapper {
+  border: 1px solid #333;
+  height: 100%;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #056021;
+  padding: 5px 0;
+}
+.header__logo {
+  margin-left: 2%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.header__logo img {
+  background-color: #fff;
+  border-radius: 50%;
+}
+.header__logo span {
+  font-family: "Geologica-Light";
+  font-style: italic;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+
+  color: #fff;
+}
+.header__menu {
+  margin-right: 10%;
+  display: flex;
+  align-items: center;
+}
+.header__menu-list {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+.header__logo img {
+  max-width: 80px;
+}
+.header__menu-list button img {
+  max-height: 40px;
+}
+.header__menu-list button {
+  background-color: #fff;
+  width: 60px;
+  height: 50px;
+  border-radius: 20%;
+  transition: 0.2s;
+}
+.header__menu-list button:hover {
+  width: 65px;
+  height: 55px;
+}
+
+.main__welcome {
+  max-width: 800px;
+  text-align: center;
+  margin: 5% auto;
+  padding: 0 10px;
+}
+.main__welcome p {
+  font-family: "Geologica-Light";
+  font-size: 20px;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+  color: #333333;
+}
+.header {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+.header__menu {
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .header__logo img {
+    display: none;
+  }
+}
+@media (max-width: 530px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+  }
+  .header__menu {
+    margin: 0;
+  }
+}
