@@ -16,14 +16,26 @@
           <span><b>НМИЦ_БОТ_OCR_1.0</b></span>
         </div>
         <div class="header__menu">
-          <nav class="header__menu-list">
-            <button type="button">
+          <form
+            class="header__menu-list"
+            enctype="multipart/form-data"
+            method="post"
+          >
+            <!-- <button type="button">
               <img src="/Hacaton/FronEnd/photo.png" alt="#" />
-            </button>
-            <button type="button">
-              <img src="/Hacaton/FronEnd/upload.png" alt="#" />
-            </button>
-          </nav>
+            </button> -->
+
+            <p>
+              <input
+                type="file"
+                onchange="download(this)"
+                id="photoloader"
+                name="photo"
+                multiple
+                accept="image/*,image/jpeg"
+              />
+            </p>
+          </form>
         </div>
       </header>
       <main class="main __container">
@@ -38,7 +50,22 @@
           </p>
         </div>
       </main>
-      <footer class="footer __container"></footer>
+      <footer class="footer __container">
+        <iframe
+          id="hiddenframe"
+          name="hiddenframe"
+          style="width: 0px; height: 0px; border: 0px"
+        ></iframe>
+      </footer>
     </div>
+    <script>
+      function download(input) {
+        let file = input.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        console.log(reader);
+      }
+    </script>
   </body>
 </html>
