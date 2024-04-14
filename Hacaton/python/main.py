@@ -1,5 +1,6 @@
 import os.path
 import time
+
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import  Service
@@ -120,23 +121,34 @@ class classificator():
                 return ("Энергетическая ценность товара не соответствует рекомендациям ВОЗ")
 
 
-def create_json(dbName,img_path):
+def create_json(dbName,name,normal_energy_quantity,normal_energy_score,code):
     json_data = [{
-        "name": name_of_product.replace("\n"," "),
-        "normal_energy_quantity": classificator.search_energy(product_composition),
-        "normal_energy_score": classificator.normal_energy(name_of_product, product_composition),
-        "code":recognizer().recognize_barcode(img_path),
+        "name": name,
+        "normal_energy_quantity": normal_energy_quantity,
+        "normal_energy_score": normal_energy_score,
+        "code":code,
     }
     ]
     with open(dbName, 'w') as file:
         file.write(json.dumps(json_data, indent=2, ensure_ascii=False))
 
-def add_to_json(dbName,img_path):
+def create_base_json(dbName,name,normal_energy_quantity,normal_energy_score,code):
+    json_data = [{
+        "name": name,
+        "normal_energy_quantity": normal_energy_quantity,
+        "normal_energy_score": normal_energy_score,
+        "code":code,
+    }
+    ]
+    with open(dbName, 'w') as file:
+        file.write(json.dumps(json_data, indent=2, ensure_ascii=False))
+
+def add_to_json(dbName,name,normal_energy_quantity,normal_energy_score,code):
     json_data = {
-        "name": name_of_product.replace("\n"," "),
-        "normal_energy_quantity": classificator.search_energy(product_composition),
-        "normal_energy_score": classificator.normal_energy(name_of_product, product_composition),
-        "code":recognizer().recognize_barcode(img_path),
+        "name": name,
+        "normal_energy_quantity": normal_energy_quantity,
+        "normal_energy_score": normal_energy_score,
+        "code":code,
     }
     data = json.load(open(dbName))
     data.append(json_data)
@@ -144,61 +156,55 @@ def add_to_json(dbName,img_path):
         json.dump(data, file, indent=2, ensure_ascii=False)
 
 if __name__ == "__main__":
-    name_of_product = None
-    product_composition = None
+
+    def save_to_db(text):
+        product_composition = None
+        normal_energy_quantity = None
+        normal_energy_score = None
+        sub_massiv_text = text.lower().split('состав')
+        name_of_product = sub_massiv_text[0]
+        if name_of_product != None:
+            name_of_product = name_of_product.replace("\n"," ")
+            name_of_product = recognizer().check_spelling(name_of_product)
+        if (len(sub_massiv_text) > 1):
+            product_composition = sub_massiv_text[1]
+        if (product_composition != None):
+            normal_energy_score = classificator.normal_energy(name_of_product, product_composition)
+            normal_energy_quantity = classificator.search_energy(product_composition)
+        else:
+
+            normal_energy_quantity = "-"
+            normal_energy_score = "недостаточно информации"
+        dbName = "db.json"
+        if os.path.exists(dbName):
+            add_to_json(dbName, name_of_product,normal_energy_quantity,normal_energy_score,"-")
+        else:
+            create_json(dbName, name_of_product,normal_energy_quantity,normal_energy_score,"-")
+
     def enter_data(img_path):
-        print("введите путь изображения:")
 
         text = recognizer().recognize_text(img_path)
         if text != None:
+
+            product_composition = None
             print(recognizer().check_spelling(text))
             sub_massiv_text = recognizer().recognize_text(img_path).lower().split('состав')
             name_of_product = sub_massiv_text[0]
-            product_composition = None
             if (len(sub_massiv_text) > 1):
                 product_composition = sub_massiv_text[1]
             if (product_composition != None):
+
+                normal_energy_score = classificator.normal_energy(name_of_product, product_composition)
+                normal_energy_quantity = classificator.search_energy(product_composition)
                 print(classificator.normal_energy(name_of_product, product_composition))
             else:
-                print("недостаточно информации")
 
+                normal_energy_quantity = "-"
+                normal_energy_score = "недостаточно информации"
+                print("недостаточно информации")
+            save_to_db(text)
             print(parser().parse())
-            dbName = "db.json"
-            if os.path.exists(dbName):
-                add_to_json(dbName, img_path)
-            else:
-                create_json(dbName, img_path)
         else:
             print("text not detected")
     enter_data(sys.argv[1])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
