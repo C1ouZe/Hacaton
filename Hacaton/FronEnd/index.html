@@ -21,15 +21,18 @@
             enctype="multipart/form-data"
             method="post"
           >
-            <!-- <button type="button">
+            <button type="button">
               <img src="/Hacaton/FronEnd/photo.png" alt="#" />
-            </button> -->
+            </button>
 
             <p>
+              <label for="file-upload" class="custom-file-upload"
+                ><img src="/Hacaton/FronEnd/upload.png" alt=""
+              /></label>
               <input
                 type="file"
                 onchange="download(this)"
-                id="photoloader"
+                id="file-upload"
                 name="photo"
                 multiple
                 accept="image/*,image/jpeg"
@@ -49,6 +52,13 @@
             малыша!
           </p>
         </div>
+        <div class="main__result">
+          <p class="line">
+            Энергетическая ценность по рекомендациям ВОЗ для Сухих каш - 80
+            ккал, для Молочных изделий - 60 ккал
+          </p>
+          <p class="green">Энергетическая ценность: соответствует качеству</p>
+        </div>
       </main>
       <footer class="footer __container">
         <iframe
@@ -63,7 +73,6 @@
         let file = input.files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
-
         console.log(reader);
       }
     </script>
