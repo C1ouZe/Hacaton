@@ -13,11 +13,12 @@
 Запустите скрипт командой python product_classifier.py в вашем терминале.
 
 Примеры кода:
+
     # Пример инициализации данных продукта
+    
     text = """
     ... ваш текст о продукте ...
     """
     name_of_product, product_composition = text.lower().split('состав')
-    
     # Запуск функции оценки энергетической ценности
     normal_energy(name_of_product, product_composition)
